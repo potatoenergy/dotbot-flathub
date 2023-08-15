@@ -11,14 +11,14 @@ class Flatpak(dotbot.Plugin):
         if directive != self._directive:
             raise ValueError('flatpak cannot handle directive %s' %
                 directive)
-        
+
         success = True
 
         for app in data:
             try:
                 subprocess.run(
-                        ['flatpak install --noninteractive '+app], 
-                        shell=True, 
+                        ['flatpak install --noninteractive --assumeyes flathub '+app],
+                        shell=True,
                         check=True)
             except subprocess.CalledProcessError:
                 success = False
